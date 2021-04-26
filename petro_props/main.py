@@ -11,9 +11,9 @@ def calculate_M(y: np.ndarray, mw: np.ndarray) -> np.ndarray:
 
 
 if __name__ == "__main__":
-    from gas_density.read_input import read_composition_and_props
-    from gas_density.kay_mixing import calculate_critical_props
-    from gas_density.hall_yarborough import calculate_Z
+    from petro_props.read_input import read_composition_and_props
+    from petro_props.kay_mixing import calculate_critical_props
+    from petro_props.hall_yarborough import calculate_Z
 
     T = float(input("T [degC] = ")) + 273
     p = float(input("p [bar] = "))
