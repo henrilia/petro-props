@@ -1,4 +1,5 @@
 import numpy as np
+from scipy.optimize import bisect
 
 
 def _calculate_theta(T_pr: float) -> float:
@@ -53,16 +54,17 @@ def _fp(rho_hat: float, theta: float, alpha: float, p_pr: float) -> float:
 
 
 def _calculate_rho_hat(theta: float, alpha: float, p_pr: float) -> float:
-    xn = 0.1
-    for n in range(0, 200):
-        fxn = -_f(xn, theta, alpha, p_pr)
-        if np.abs(fxn) < 0.01:
-            return xn
-        fpxn = _fp(xn, theta, alpha, p_pr)
-        if fpxn == 0:
-            return None
-        xn = xn - fxn / fpxn
-    return None
+    # xn = 0.1
+    # for n in range(0, 200):
+    #     fxn = -_f(xn, theta, alpha, p_pr)
+    #     if np.abs(fxn) < 0.1:
+    #         return xn
+    #     fpxn = _fp(xn, theta, alpha, p_pr)
+    #     if fpxn == 0:
+    #         return None
+    #     xn = xn - fxn / fpxn
+    # return None
+    return bisect(lambda rho_hat: _f(rho_hat, theta, alpha, p_pr), 0.01, 0.99)
 
 
 def calculate_Z(T_pr: float, p_pr: float) -> float:
